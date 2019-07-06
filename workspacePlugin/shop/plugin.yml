@@ -1,0 +1,8 @@
+name: shop
+author: LeRoiDesKiwis
+version: 1.0
+main: fr.leroideskiwis.shop.Main
+depend: [economyPlugin]
+commands:
+  shop:
+    description: ouvre l'inventaire du shop

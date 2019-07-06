@@ -1,0 +1,7 @@
+name: inventoryW
+version: 1.0
+author: LeRoiDesKiwis
+main: fr.leroideskiwis.inventory.Main
+commands:
+  utils:
+    description: ouvre un menu utile

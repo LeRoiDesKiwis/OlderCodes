@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;plugin.yml&apos; to &apos;Utils&apos;&#x0D;&#x0A;- Original project: &apos;PetPlugin&apos;&#x0D;&#x0A;- Destination element: &apos;Utils&apos;&#x0D;&#x0A;- Original element: &apos;plugin.yml&apos;" description="Copy file" destination="=Utils" element1="plugin.yml" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1518215072326" units="0" version="1.0"/>
+</session>

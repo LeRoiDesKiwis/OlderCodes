@@ -1,0 +1,29 @@
+#don't remove "" if you don't want errors !
+
+#default is the default join/quit message of spigot
+#use <player> for target the player who join/quit
+
+messages:
+  join: "&2[&a+&2] &a<player> a rejoint la partie"
+  quit: "&4[&c-&4] &c<player> a quitté la partie"
+
+#<target> : the username of the player who receive the message
+#<message> : the message who is send
+
+privateMessages:
+  send: "&7&6[Me -> <target> &7] : <message>"
+  receive: "&7[&6<sender> -> Me&7] : <message>"
+
+  
+prefixes:
+  owner:
+    #the name of the owner of the server
+    name: "LeRoiDesKiwis"
+    #the prefixe
+    prefixe: "&1&k##&r&c[&4Fondateur&c]&1&k##&c"
+  
+  op:
+    prefixe: "&4[&cOP&4]&c"
+    
+  players:
+    prefixe: "&8[&7Joueur&8]&7"

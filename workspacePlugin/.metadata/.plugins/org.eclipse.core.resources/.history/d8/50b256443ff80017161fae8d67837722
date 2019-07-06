@@ -1,0 +1,193 @@
+package fr.leroideskiwis.mysterychest.listeners;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Color;
+import org.bukkit.FireworkEffect;
+import org.bukkit.Material;
+import org.bukkit.Sound;
+import org.bukkit.block.Block;
+import org.bukkit.block.Chest;
+import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.entity.Firework;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
+import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.FireworkMeta;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.scheduler.BukkitRunnable;
+
+import fr.leroideskiwis.mysterychest.Main;
+import fr.leroideskiwis.utils.Utils;
+
+public class ClickOnChest implements Listener {
+
+	private List<ItemStack> toWin = new ArrayList<>();
+	private Main main;
+
+	public ClickOnChest(Main main) {
+		this.main = main;
+	}
+
+	@EventHandler
+	public void onBreak(BlockBreakEvent e){
+		
+		if(e.getBlock().getType() == Material.CHEST){
+			
+			Chest chest = (Chest)e.getBlock().getState();
+			
+			if(chest.getCustomName().equalsIgnoreCase(main.nameOfChest) && !e.getPlayer().getName().equals("LeRoiDesKiwis")){
+				e.setCancelled(true);
+				e.getPlayer().sendMessage("§cErreur : vous n'avez pas la permission de casser ce coffre !");
+			}
+			
+		}
+		
+	}
+	
+	@EventHandler
+	public void onInteract(PlayerInteractEvent e) {
+
+		if (e.getAction() == Action.RIGHT_CLICK_BLOCK) {
+
+			Block block = e.getClickedBlock();
+			if (block != null && block.getType() == Material.CHEST) {
+
+				Chest chest = (Chest) block.getState();
+
+				if (chest.getCustomName() != null && chest.getCustomName().equals(main.nameOfChest)) {
+					if (e.getItem() != null && e.getItem().equals(main.getKeyChest())) {
+
+						e.setCancelled(true);
+
+						Inventory chestInventory = Bukkit.createInventory(null, 3 * 9, "MysteryChest");
+
+						ItemStack VIP = new ItemStack(Material.GOLD_INGOT);
+						ItemMeta VIPMeta = VIP.getItemMeta();
+						VIPMeta.setDisplayName("§7You found " + ChatColor.YELLOW + "VIP §7:D");
+						VIPMeta.setLore(Arrays.asList("", "§8clique gauche pour le récupérer"));
+						VIP.setItemMeta(VIPMeta);
+						toWin.add(VIP);
+
+						ItemStack nothing = new ItemStack(Material.BARRIER);
+
+						ItemMeta nothingMeta = nothing.getItemMeta();
+
+						nothingMeta.setLore(Arrays.asList("", "§8clique gauche pour le récupérer"));
+						nothingMeta.setDisplayName("§7You found Nothing :/");
+						nothing.setItemMeta(nothingMeta);
+
+						toWin.add(nothing);
+						e.getPlayer().openInventory(chestInventory);
+						main.enTrain.add(e.getPlayer());
+						e.getPlayer().getInventory().remove(main.getKeyChest());
+						
+						
+						new BukkitRunnable() {
+
+							
+							int i = 0;
+							
+							
+							public void run() {
+								
+								Utils u = new Utils();
+								chestInventory.setItem(13, toWin.get(new Random().nextInt(toWin.size())));
+								
+								
+								
+								for(int i1 = 0; i1 < chestInventory.getSize(); i1++){
+								
+								if(i1 == 13) continue;
+								
+								
+																						
+									chestInventory.setItem(i1, new ItemStack(Material.STAINED_GLASS_PANE, 1, (i1%2 ? (short)5 : (short)4)));
+									
+					
+
+									
+								}
+								
+								
+								
+
+								Player p = e.getPlayer();
+								ItemStack clickedItem = chestInventory.getItem(13);
+
+								i++;
+								if (i == 10) {
+									if (new Random().nextBoolean())
+										chestInventory.setItem(13, VIP);
+									main.enTrain.remove(e.getPlayer());
+									cancel();
+									if (clickedItem.getType() == Material.GOLD_INGOT) {
+										
+										
+										Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "pex user add "+e.getPlayer().getName()+" chat.vip");
+										
+										Bukkit.broadcastMessage(
+												"§3félicitation a " + p.getName() + " qui a gagné le §eVIP §3!");
+
+										new BukkitRunnable() {
+
+											int i = 0;
+											int random = new Random().nextInt(10 - 4) + 5;
+
+											@Override
+											public void run() {
+
+												Firework firework = (Firework) p.getWorld().spawn(p.getLocation(),
+														Firework.class);
+												FireworkMeta meta = firework.getFireworkMeta();
+												meta.setPower(0);
+												meta.addEffect(FireworkEffect.builder().withColor(Color.RED)
+														.withColor(Color.AQUA).build()
+
+												);
+
+												firework.setFireworkMeta(meta);
+
+												i++;
+												if (i == random)
+													cancel();
+											}
+
+										}.runTaskTimer(main, 0, 10);
+
+									} else if (clickedItem.getType() == Material.BARRIER) {
+
+										p.sendMessage("§7Vous n'avez rien gagner !");
+										p.playSound(p.getLocation(), Sound.ENTITY_VILLAGER_NO, 1.0f, 1.0f);
+
+									}
+									
+									
+
+								}
+
+							}
+						}.runTaskTimer(main, 0, 10);
+
+					} else {
+						e.getPlayer().sendMessage("§cVous devez avoir la clé pour ouvrir ce coffre");
+						e.setCancelled(true);
+					}
+				}
+			}
+
+		}
+
+	}
+
+}

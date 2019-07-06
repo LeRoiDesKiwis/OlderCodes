@@ -1,0 +1,12 @@
+ERROR 2018-04-02 13:50:03,211 (XMPPConnectionService.java:400)  new connection state == ERROR
+SASL authentication DIGEST-MD5 failed: not-authorized: 
+	at org.jivesoftware.smack.SASLAuthentication.authenticate(SASLAuthentication.java:342)
+	at org.jivesoftware.smack.XMPPConnection.login(XMPPConnection.java:243)
+	at de.fu_berlin.inf.dpp.net.xmpp.XMPPConnectionService.connect(XMPPConnectionService.java:276)
+	at de.fu_berlin.inf.dpp.communication.connection.ConnectionHandler.connectXMPPInternal(ConnectionHandler.java:332)
+	at de.fu_berlin.inf.dpp.communication.connection.ConnectionHandler.connect(ConnectionHandler.java:190)
+	at de.fu_berlin.inf.dpp.StartupSaros$1.run(StartupSaros.java:113)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.lang.Thread.run(Unknown Source)
+WARN  2018-04-02 13:50:08,415 (StunServiceImpl.java:420) received no response from STUN server stunserver.org/67.227.226.240:3478 at local address /192.168.43.57:0
+WARN  2018-04-02 13:50:43,436 (StunServiceImpl.java:420) received no response from STUN server stunserver.org/67.227.226.240:3478 at local address /192.168.43.57:0

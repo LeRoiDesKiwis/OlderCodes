@@ -1,0 +1,8 @@
+name: FunUtilsAndProjectile
+author: LeRoiDesKiwis
+version: 0.1
+main: fr.leroideskiwis.plugin.Main
+commands:
+  dressAllWolf:
+  vote:
+  setpopo:

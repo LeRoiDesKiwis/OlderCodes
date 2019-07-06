@@ -1,0 +1,9 @@
+name: GamesManager
+author: LeRoiDesKiwis
+version: 1.0
+depend: [TntRun, enderpearlGame, TheFloorIsLava]
+main: fr.leroideskiwis.gamemanager.Main
+commands:
+  bypass:
+  join_s:
+  hub:

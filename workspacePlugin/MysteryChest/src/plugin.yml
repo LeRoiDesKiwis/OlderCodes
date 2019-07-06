@@ -1,0 +1,7 @@
+name: mysteryChest
+author: LeRoiDesKiwis
+version: 1.0
+main: fr.leroideskiwis.mysterychest.Main
+commands:
+  getkey:
+  registerChest:

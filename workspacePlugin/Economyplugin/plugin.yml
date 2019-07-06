@@ -1,0 +1,6 @@
+name: economyPlugin
+author: LeRoiDesKiwis
+version: 1.0
+main: fr.leroideskiwis.coins.Main
+commands:
+  coins:

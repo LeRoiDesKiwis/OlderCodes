@@ -1,0 +1,4 @@
+name: gamesManager
+author: LeRoiDesKiwis
+version: 1.0
+main: fr.leroideskiwis.gamemanager.Main

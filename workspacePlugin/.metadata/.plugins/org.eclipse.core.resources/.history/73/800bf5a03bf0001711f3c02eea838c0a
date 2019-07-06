@@ -1,0 +1,16 @@
+package fr.leroideskiwis.enderpearlbattle.task;
+
+import org.bukkit.scheduler.BukkitRunnable;
+
+public class GameCycleTask extends BukkitRunnable{
+
+	private Main main;
+	
+	@Override
+	public void run() {
+		
+		
+		
+	}
+
+}

@@ -1,0 +1,17 @@
+package fr.leroideskiwis.tpaplugin.commands;
+
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+
+public class CommandTpAccept implements CommandExecutor {
+
+	@Override
+	public boolean onCommand(CommandSender s, Command arg1, String arg2, String[] args) {
+		
+		if(main.senderIsPlayer(s))
+		
+		return false;
+	}
+
+}

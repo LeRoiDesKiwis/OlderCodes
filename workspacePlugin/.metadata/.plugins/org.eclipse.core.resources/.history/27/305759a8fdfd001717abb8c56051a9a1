@@ -1,0 +1,8 @@
+name: GamesManager
+author: LeRoiDesKiwis
+version: 1.0
+depend: [TntRun, enderpearlGame]
+main: fr.leroideskiwis.gamemanager.Main
+commands:
+  bypass:
+  join_çs:

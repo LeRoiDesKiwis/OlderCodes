@@ -1,0 +1,43 @@
+INFO  2018-04-02 13:48:19,920 (Saros.java:220) Starting Saros 14.10.31 running:
+  Java Version: 1.8.0_161
+  Java Vendor: Oracle Corporation
+  Eclipse Runtime Version: 3.11.1.v20150903-1804
+  Operating System: Windows 7 (6.1)
+  Hardware Architecture: x86
+INFO  2018-04-02 13:48:19,992 (SarosContext.java:153) creating Saros runtime context...
+DEBUG 2018-04-02 13:48:20,095 (XMPPAccountStore.java:117) loading accounts from file: C:\Users\Utilisateur\.saros\config.dat
+DEBUG 2018-04-02 13:48:21,344 (XMPPAccountStore.java:176) loaded 2 account(s)
+INFO  2018-04-02 13:48:21,691 (SarosContext.java:199) successfully created Saros runtime context
+DEBUG 2018-04-02 13:48:21,801 (DataTransferManager.java:467) used transport order for the current XMPP connection: [XMPP-Socks5-Transport, XMPP-IBB-Transport]
+INFO  2018-04-02 13:48:21,839 (PreferenceInitializer.java:50) initializing preference default values
+DEBUG 2018-04-02 13:48:21,967 (SarosAnnotation.java:117) resetting annotation colors
+DEBUG 2018-04-02 13:48:22,194 (Saros.java:430) skipping conversion of old XMPP accounts, because there are already new ones
+DEBUG 2018-04-02 13:48:40,669 (SharedDocumentProvider.java:77) SharedDocumentProvider created by Eclipse
+DEBUG 2018-04-02 13:49:29,032 (WhiteboardManager.java:194) WhiteboardManager instantiated
+DEBUG 2018-04-02 13:49:29,337 (DocumentRecord.java:93) Added Node: attr(152266976932191770) name=svg
+DEBUG 2018-04-02 13:49:32,068 (XMPPConnectionService.java:439) started Socks5 proxy on port: 7777 [listening on all interfaces]
+DEBUG 2018-04-02 13:49:34,386 (XMPPConnectionService.java:459) using autodetected addresses: [192.168.43.57, fe80:0:0:0:5909:ff6c:4f52:7730%wlan0]
+DEBUG 2018-04-02 13:49:57,848 (XMPPConnectionService.java:398)  new connection state == CONNECTING
+ERROR 2018-04-02 13:50:03,211 (XMPPConnectionService.java:400)  new connection state == ERROR
+SASL authentication DIGEST-MD5 failed: not-authorized: 
+	at org.jivesoftware.smack.SASLAuthentication.authenticate(SASLAuthentication.java:342)
+	at org.jivesoftware.smack.XMPPConnection.login(XMPPConnection.java:243)
+	at de.fu_berlin.inf.dpp.net.xmpp.XMPPConnectionService.connect(XMPPConnectionService.java:276)
+	at de.fu_berlin.inf.dpp.communication.connection.ConnectionHandler.connectXMPPInternal(ConnectionHandler.java:332)
+	at de.fu_berlin.inf.dpp.communication.connection.ConnectionHandler.connect(ConnectionHandler.java:190)
+	at de.fu_berlin.inf.dpp.StartupSaros$1.run(StartupSaros.java:113)
+	at de.fu_berlin.inf.dpp.util.ThreadUtils$1.run(ThreadUtils.java:38)
+	at java.lang.Thread.run(Unknown Source)
+DEBUG 2018-04-02 13:50:03,518 (XMPPConnectionService.java:398)  new connection state == NOT_CONNECTED
+WARN  2018-04-02 13:50:08,415 (StunServiceImpl.java:420) received no response from STUN server stunserver.org/67.227.226.240:3478 at local address /192.168.43.57:0
+DEBUG 2018-04-02 13:50:31,755 (CreateXMPPAccountWizard.java:135) Account creation succeeded: username=LeRoiDesKiwis, server=saros-con.imp.fu-berlin.de
+DEBUG 2018-04-02 13:50:32,289 (XMPPAccountStore.java:232) saved 3 account(s)
+DEBUG 2018-04-02 13:50:32,834 (XMPPAccountStore.java:232) saved 3 account(s)
+DEBUG 2018-04-02 13:50:32,870 (XMPPConnectionService.java:439) started Socks5 proxy on port: 7777 [listening on all interfaces]
+DEBUG 2018-04-02 13:50:33,187 (XMPPConnectionService.java:459) using autodetected addresses: [192.168.43.57, fe80:0:0:0:5909:ff6c:4f52:7730%wlan0]
+DEBUG 2018-04-02 13:50:33,189 (XMPPConnectionService.java:398)  new connection state == CONNECTING
+DEBUG 2018-04-02 13:50:34,437 (XMPPConnectionService.java:398) leroideskiwis@saros-con.imp.fu-berlin.de/Saros new connection state == CONNECTED
+DEBUG 2018-04-02 13:50:34,437 (DataTransferManager.java:467) used transport order for the current XMPP connection: [XMPP-Socks5-Transport, XMPP-IBB-Transport]
+DEBUG 2018-04-02 13:50:34,441 (SkypeManager.java:289) Refreshing Skype username cache...
+INFO  2018-04-02 13:50:34,530 (SingleUserChatService.java:84) chat created between leroideskiwis@saros-con.imp.fu-berlin.de/Saros <->saros-con.imp.fu-berlin.de, created local: false
+WARN  2018-04-02 13:50:43,436 (StunServiceImpl.java:420) received no response from STUN server stunserver.org/67.227.226.240:3478 at local address /192.168.43.57:0

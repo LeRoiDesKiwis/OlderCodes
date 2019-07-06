@@ -1,0 +1,7 @@
+name: plugintest
+author: LeRoiDesKiwis
+version: 1.0
+main: fr.leroideskiwis.plugintest.Main
+commands:
+  test:
+  tpworld:

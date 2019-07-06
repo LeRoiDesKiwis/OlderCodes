@@ -1,0 +1,14 @@
+package fr.leroideskiwis.bungeetest.commands;
+
+import net.md_5.bungee.api.CommandSender;
+import net.md_5.bungee.api.plugin.Command;
+
+public class CommandeHub extends Command {
+
+	@Override
+	public void execute(CommandSender arg0, String[] arg1) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

@@ -1,0 +1,75 @@
+INFO  2018-04-11 23:44:36,606 (Saros.java:220) Starting Saros 14.10.31 running:
+  Java Version: 1.8.0_161
+  Java Vendor: Oracle Corporation
+  Eclipse Runtime Version: 3.11.1.v20150903-1804
+  Operating System: Windows 7 (6.1)
+  Hardware Architecture: x86
+INFO  2018-04-11 23:44:36,835 (SarosContext.java:153) creating Saros runtime context...
+DEBUG 2018-04-11 23:44:36,986 (XMPPAccountStore.java:117) loading accounts from file: C:\Users\Utilisateur\.saros\config.dat
+DEBUG 2018-04-11 23:44:38,109 (XMPPAccountStore.java:176) loaded 3 account(s)
+INFO  2018-04-11 23:44:38,896 (SarosContext.java:199) successfully created Saros runtime context
+DEBUG 2018-04-11 23:44:38,990 (DataTransferManager.java:467) used transport order for the current XMPP connection: [XMPP-Socks5-Transport, XMPP-IBB-Transport]
+INFO  2018-04-11 23:44:39,082 (PreferenceInitializer.java:50) initializing preference default values
+DEBUG 2018-04-11 23:44:39,256 (SarosAnnotation.java:117) resetting annotation colors
+DEBUG 2018-04-11 23:44:39,597 (Saros.java:430) skipping conversion of old XMPP accounts, because there are already new ones
+DEBUG 2018-04-11 23:44:53,455 (SharedDocumentProvider.java:77) SharedDocumentProvider created by Eclipse
+DEBUG 2018-04-11 23:45:11,695 (WhiteboardManager.java:194) WhiteboardManager instantiated
+DEBUG 2018-04-11 23:45:12,096 (DocumentRecord.java:93) Added Node: attr(152348311192351094) name=svg
+DEBUG 2018-04-11 23:45:14,752 (XMPPConnectionService.java:439) started Socks5 proxy on port: 7777 [listening on all interfaces]
+DEBUG 2018-04-11 23:45:16,970 (XMPPConnectionService.java:459) using autodetected addresses: [192.168.43.57, fe80:0:0:0:5909:ff6c:4f52:7730%wlan0]
+DEBUG 2018-04-11 23:45:17,053 (XMPPConnectionService.java:398)  new connection state == CONNECTING
+DEBUG 2018-04-11 23:45:19,249 (XMPPConnectionService.java:398) leroideskiwis@saros-con.imp.fu-berlin.de/Saros new connection state == CONNECTED
+DEBUG 2018-04-11 23:45:19,249 (DataTransferManager.java:467) used transport order for the current XMPP connection: [XMPP-Socks5-Transport, XMPP-IBB-Transport]
+DEBUG 2018-04-11 23:45:19,268 (SkypeManager.java:289) Refreshing Skype username cache...
+WARN  2018-04-11 23:45:28,714 (StunServiceImpl.java:420) received no response from STUN server stunserver.org/67.227.226.240:3478 at local address /192.168.43.57:0
+ERROR 2018-04-12 14:52:49,929 (XMPPConnectionService.java:101) XMPP connection error: 
+java.net.SocketException: Software caused connection abort: recv failed
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.socketRead(Unknown Source)
+	at java.net.SocketInputStream.read(Unknown Source)
+	at java.net.SocketInputStream.read(Unknown Source)
+	at sun.security.ssl.InputRecord.readFully(Unknown Source)
+	at sun.security.ssl.InputRecord.read(Unknown Source)
+	at sun.security.ssl.SSLSocketImpl.readRecord(Unknown Source)
+	at sun.security.ssl.SSLSocketImpl.readDataRecord(Unknown Source)
+	at sun.security.ssl.AppInputStream.read(Unknown Source)
+	at sun.nio.cs.StreamDecoder.readBytes(Unknown Source)
+	at sun.nio.cs.StreamDecoder.implRead(Unknown Source)
+	at sun.nio.cs.StreamDecoder.read(Unknown Source)
+	at java.io.InputStreamReader.read(Unknown Source)
+	at java.io.BufferedReader.fill(Unknown Source)
+	at java.io.BufferedReader.read1(Unknown Source)
+	at java.io.BufferedReader.read(Unknown Source)
+	at org.xmlpull.mxp1.MXParser.fillBuf(MXParser.java:2992)
+	at org.xmlpull.mxp1.MXParser.more(MXParser.java:3046)
+	at org.xmlpull.mxp1.MXParser.nextImpl(MXParser.java:1144)
+	at org.xmlpull.mxp1.MXParser.next(MXParser.java:1093)
+	at org.jivesoftware.smack.PacketReader.parsePackets(PacketReader.java:312)
+	at org.jivesoftware.smack.PacketReader.access$000(PacketReader.java:48)
+	at org.jivesoftware.smack.PacketReader$1.run(PacketReader.java:76)
+ERROR 2018-04-12 14:52:50,661 (XMPPConnectionService.java:400)  new connection state == ERROR
+java.net.SocketException: Software caused connection abort: recv failed
+	at java.net.SocketInputStream.socketRead0(Native Method)
+	at java.net.SocketInputStream.socketRead(Unknown Source)
+	at java.net.SocketInputStream.read(Unknown Source)
+	at java.net.SocketInputStream.read(Unknown Source)
+	at sun.security.ssl.InputRecord.readFully(Unknown Source)
+	at sun.security.ssl.InputRecord.read(Unknown Source)
+	at sun.security.ssl.SSLSocketImpl.readRecord(Unknown Source)
+	at sun.security.ssl.SSLSocketImpl.readDataRecord(Unknown Source)
+	at sun.security.ssl.AppInputStream.read(Unknown Source)
+	at sun.nio.cs.StreamDecoder.readBytes(Unknown Source)
+	at sun.nio.cs.StreamDecoder.implRead(Unknown Source)
+	at sun.nio.cs.StreamDecoder.read(Unknown Source)
+	at java.io.InputStreamReader.read(Unknown Source)
+	at java.io.BufferedReader.fill(Unknown Source)
+	at java.io.BufferedReader.read1(Unknown Source)
+	at java.io.BufferedReader.read(Unknown Source)
+	at org.xmlpull.mxp1.MXParser.fillBuf(MXParser.java:2992)
+	at org.xmlpull.mxp1.MXParser.more(MXParser.java:3046)
+	at org.xmlpull.mxp1.MXParser.nextImpl(MXParser.java:1144)
+	at org.xmlpull.mxp1.MXParser.next(MXParser.java:1093)
+	at org.jivesoftware.smack.PacketReader.parsePackets(PacketReader.java:312)
+	at org.jivesoftware.smack.PacketReader.access$000(PacketReader.java:48)
+	at org.jivesoftware.smack.PacketReader$1.run(PacketReader.java:76)
+DEBUG 2018-04-12 14:52:50,849 (XMPPConnectionService.java:398)  new connection state == NOT_CONNECTED

@@ -1,0 +1,305 @@
+package fr.leroideskiwis.modoplugin.listeners;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.bukkit.BanList;
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.Sound;
+import org.bukkit.block.Sign;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.event.player.PlayerCommandPreprocessEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
+
+import fr.leroideskiwis.modoplugin.Main;
+import fr.leroideskiwis.modoplugin.utils.SpigotUtils;
+
+public class EventListener implements Listener {
+	
+	SpigotUtils utils = new SpigotUtils(Main.getInstance());
+	private List<String> blacklistedCommands = new ArrayList<>();
+	
+	public void onClickOnSign(PlayerInteractEvent e){
+		
+		Player p = e.getPlayer();
+		
+		if(e.getAction() == Action.RIGHT_CLICK_BLOCK){
+			if(e.getClickedBlock().getType() == Material.SIGN){
+				
+				Sign sign = (Sign)e.getClickedBlock().getState();
+				
+				if(sign.getLine(2).contains("infos")){
+					
+					p.sendMessage("");
+					p.sendMessage("");
+					p.sendMessage("§6Informations :");
+					p.sendMessage("");
+					p.sendMessage("§aBonjour et bienvenue, tu est sur un serveur privé ou je test mes plugins :D. Voila c'était une tres courte presentation ! Allez tchao !");
+					p.sendMessage("");
+					p.sendMessage("");
+				}
+				
+			}
+		}
+		
+	}
+	
+	@EventHandler(priority=EventPriority.HIGHEST)
+	public void onCommand(PlayerCommandPreprocessEvent e){
+		
+		
+		
+		String cmd = e.getMessage();
+		
+		if(cmd.startsWith("/kick") || cmd.startsWith("/ban")){
+			
+			e.getPlayer().sendMessage("§cErreur : merci d'utiliser le /ss pour ban et kick !");
+			
+			e.setCancelled(true);
+			return;
+			
+		}
+		
+		if(Main.getInstance().mutes.contains(e.getPlayer()) || Main.getInstance().freezes.contains(e.getPlayer())){
+			if(cmd.startsWith("/rl") || cmd.startsWith("/reload") || cmd.startsWith("/ss")){
+				e.getPlayer().sendMessage("§cVous êtes sanctionner, vous ne pouvez pas reload le serveur !");
+				e.setCancelled(true);
+			}
+		}
+		
+		blacklistedCommands.add("/say");
+		blacklistedCommands.add("/me");
+		blacklistedCommands.add("/tellraw");
+		blacklistedCommands.add("/title");
+		blacklistedCommands.add("/msg");
+		blacklistedCommands.add("/r");
+		
+	
+		
+		if(Main.getInstance().mutes.contains(e.getPlayer())){
+			
+			boolean mute = false;
+			
+			for(String bla : blacklistedCommands){
+				
+				if(e.getMessage().startsWith(bla)) {
+					mute = true;
+				}
+				
+			}
+			
+			if(!mute) return;
+			
+			e.setCancelled(true);
+			
+			e.getPlayer().sendMessage("§cVous êtes réduit au silence !");
+
+		}
+		
+	}
+	
+	@EventHandler(priority=EventPriority.HIGHEST)
+	public void onPlayerSpeak(AsyncPlayerChatEvent e){
+		
+		
+		
+		if(Main.getInstance().mutes.contains(e.getPlayer())){
+			
+			e.setCancelled(true);
+			
+			e.getPlayer().sendMessage("§cVous êtes réduit au silence !");
+
+		}
+		
+	}
+	
+	@EventHandler
+	public void onPlayerMove(PlayerMoveEvent e){
+		
+		if(Main.getInstance().freezes.contains(e.getPlayer())){
+			
+		
+			e.setCancelled(true);
+			return;
+		}
+		
+	}
+	
+	/**
+	 * 
+	 * Event pour le /ss
+	 * 
+	 * @param e
+	 */
+	
+	@EventHandler
+	public void onClickOnSsInv(InventoryClickEvent e){
+		
+		if(e.getInventory().getName().contains("§cModération")){
+			e.setCancelled(true);
+			
+			Player p = (Player)e.getWhoClicked();
+			
+			String name = e.getInventory().getName().replaceAll("§cModération : §e", "");
+			
+			
+			Player target = Bukkit.getPlayer(name);
+			
+			if(target == null){
+				
+				p.sendMessage("§cLe joueur ciblé c'est déconnecté !");
+				return;
+				
+			} else {
+				
+				String sanction = null;
+
+				
+				for(String s : e.getCurrentItem().getItemMeta().getLore()){
+
+					if(s.startsWith("§7Sanction : ")){
+						
+
+						
+						sanction = s.replaceAll("§7Sanction : ", "");
+						
+					}
+					
+				}
+				
+				
+				
+				if(sanction == null){
+					
+					p.sendMessage("§cSanction invalide !");
+					return;
+					
+				}
+				
+				switch(sanction){
+				
+				case "freeze":
+					
+					Main.getInstance().freezes.add(target);
+					
+					
+					break;
+				
+				case "mute":
+					Main.getInstance().mutes.add(target);
+					break;
+				
+				case "kick":
+					target.kickPlayer("§cVous avez été kick ! Raison : "+e.getCurrentItem().getItemMeta().getDisplayName());
+					break;
+				
+				case "ban":
+					target.kickPlayer("§cVous avez été banni par "+p.getName()+" pour "+e.getCurrentItem().getItemMeta().getDisplayName());
+					Bukkit.getBanList(BanList.Type.NAME).addBan(target.getName(), e.getCurrentItem().getItemMeta().getDisplayName(), null, p.getName());
+					break;
+					
+				case "warn":
+					
+					break;
+				
+				case "deop":
+					target.setOp(false);
+					Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "pex")
+					
+					break;
+				case "Ban (kick si op)":
+					
+					if(target.isOp())target.kickPlayer("§cVous avez été kick ! Raison : "+e.getCurrentItem().getItemMeta().getDisplayName());
+					else {target.kickPlayer("§cVous avez été banni par "+p.getName()+" pour "+e.getCurrentItem().getItemMeta().getDisplayName());
+					Bukkit.getBanList(BanList.Type.NAME).addBan(target.getName(), e.getCurrentItem().getItemMeta().getDisplayName(), null, p.getName());
+					}
+					break;
+					
+				default:
+					p.sendMessage("§cSanction invalide !");
+					break;
+				
+				}
+			
+					
+					
+				
+				p.sendMessage("§a"+target.getName()+" a bien été "+sanction+ " pour "+e.getCurrentItem().getItemMeta().getDisplayName());
+				
+				utils.sendTitle(target, "§4Attention !", "§cVous avez été "+sanction+" !");
+				
+				target.sendMessage("§c----------------------------");
+				target.sendMessage("");
+				target.sendMessage("§cVous avez été "+sanction+" ! Raison : "+e.getCurrentItem().getItemMeta().getDisplayName());
+				target.sendMessage("");
+				target.sendMessage("§c----------------------------");
+				
+				target.playSound(target.getLocation(), Sound.BLOCK_ANVIL_PLACE, 1.0f, 1.0f);
+				
+				p.closeInventory();
+				
+				Bukkit.broadcastMessage(("§7[§2Modération§7] §e"+target.getName()+" §cs'est fait §e"+sanction+" §cpar §e"+p.getName()+"§c pour §e"+e.getCurrentItem().getItemMeta().getDisplayName()+"&c !").replaceAll("&c", ""));
+				
+			}
+			
+		}
+		
+	}
+	
+	@EventHandler
+	public void onClickOnReportInv(InventoryClickEvent e){
+		if(e.getInventory().getName().contains("§cReport")){
+			e.setCancelled(true);
+			
+			Player p = (Player)e.getWhoClicked();
+			
+			String name = e.getInventory().getName().replaceAll("§cReport : ", "");
+			
+			
+			Player target = Bukkit.getPlayer(name);
+			
+			if(target == null){
+				
+				p.sendMessage("§cLe joueur ciblé c'est déconnecté !");
+				return;
+				
+			} else {
+				
+				p.sendMessage("§aLe joueur a bien été signalé !");
+				
+				for(Player player : Bukkit.getOnlinePlayers()){
+					
+					if(player.isOp() || Main.getInstance().isModo(player)){
+						
+						player.sendMessage("§cNouveau report de "+p.getName()+" : "+target.getName()+" est suspecté de "+e.getCurrentItem().getItemMeta().getDisplayName());
+						
+						
+					}
+					
+				}
+				
+			}
+				
+
+
+			
+					
+					
+				p.closeInventory();
+				
+			}
+			
+		}
+	
+	
+	}
+	
+

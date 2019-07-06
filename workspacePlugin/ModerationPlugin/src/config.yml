@@ -1,0 +1,11 @@
+tips:
+- "&eTip : Fait /logs pour voir les commandes executer et les blocs de tnt plac§s"
+- "&5Rejoint notre Discord ! https://discord.gg/7CFs8XH"
+- "&eTip : Fait /sethome <nom> pour sauvegarder ton emplacement !"
+
+Prefixes: "&7[&2Mod§ration&7]"
+
+sanctions:
+  Grief:
+    material: TNT
+    sanction: BAN_OR_KICK_IF_OP

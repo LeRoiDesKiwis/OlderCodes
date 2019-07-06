@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move element &apos;ListenerPlugin.java&apos; to &apos;ender_pearl battle/src/fr.leroideskiwis.enderpearlbattle.events&apos;&#x0D;&#x0A;- Original project: &apos;ender_pearl battle&apos;&#x0D;&#x0A;- Destination element: &apos;ender_pearl battle/src/fr.leroideskiwis.enderpearlbattle.events&apos;&#x0D;&#x0A;- Original element: &apos;fr.leroideskiwis.enderpearlbattle.eventscustom.ListenerPlugin.java&apos;&#x0D;&#x0A;- Update references to refactored element" description="Move compilation unit" destination="/src&lt;fr.leroideskiwis.enderpearlbattle.events" element1="/src&lt;fr.leroideskiwis.enderpearlbattle.eventscustom{ListenerPlugin.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.move" patterns="*" policy="org.eclipse.jdt.ui.moveResources" qualified="false" references="true" stamp="1515588000162" units="1" version="1.0"/>
+</session>

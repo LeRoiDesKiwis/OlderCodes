@@ -1,0 +1,34 @@
+package fr.core.sys;
+
+import fr.core.sys.cmd.CmdGUI;
+import fr.core.sys.cmd.LobbyCmd;
+import fr.core.sys.events.JoinQuitListener;
+import fr.core.sys.gui.MenuClick;
+import org.bukkit.Bukkit;
+import org.bukkit.command.PluginCommand;
+import org.bukkit.event.Listener;
+import org.bukkit.plugin.PluginManager;
+import org.bukkit.plugin.java.JavaPlugin;
+
+public class Main extends JavaPlugin implements Listener {
+	private static Main instance;
+
+	public void onEnable() {
+		instance = this;
+		super.saveDefaultConfig();
+		PluginManager pm = Bukkit.getPluginManager();
+		pm.registerEvents(new MenuClick(), this);
+		getCommand("hub").setExecutor(new LobbyCmd());
+		getCommand("sethub").setExecutor(new LobbyCmd());
+		getCommand("menu").setExecutor(new CmdGUI());
+		getCommand("boutique").setExecutor(new CmdGUI());
+	}
+
+	public void onDisable() {
+		reloadConfig();
+	}
+
+	public static Main getInstance() {
+		return instance;
+	}
+}

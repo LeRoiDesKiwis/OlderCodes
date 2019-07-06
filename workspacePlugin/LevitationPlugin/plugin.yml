@@ -1,0 +1,6 @@
+name: LevitationPlugin
+author: LeRoiDesKiwis
+version: 1.0
+main: fr.leroideskiwis.levitation.Main
+commands:
+  lev:

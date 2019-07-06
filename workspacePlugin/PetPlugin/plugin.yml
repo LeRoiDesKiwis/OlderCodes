@@ -1,0 +1,6 @@
+name: PetPlugin
+author: LeRoiDesKiwis
+version: 1.0
+main: fr.leroideskiwis.petplugin.Main
+commands:
+  pet:

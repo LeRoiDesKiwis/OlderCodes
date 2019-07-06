@@ -1,0 +1,9 @@
+name: banManager
+version: 1.0
+author: LeRoiDesKiwis
+main: fr.leroideskiwis.banmanager.Main
+commands:
+  ban:
+  kick:
+  unban:
+  

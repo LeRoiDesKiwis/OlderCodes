@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;CustomInventory.java&apos; to &apos;ModerationPlugin/src/fr.leroideskiwis.modoplugin&apos;&#x0D;&#x0A;- Original project: &apos;inventaires plugin&apos;&#x0D;&#x0A;- Destination element: &apos;ModerationPlugin/src/fr.leroideskiwis.modoplugin&apos;&#x0D;&#x0A;- Original element: &apos;fr.leroideskiwis.inventory.CustomInventory.java&apos;" description="Copy compilation unit" destination="=ModerationPlugin/src&lt;fr.leroideskiwis.modoplugin" element1="/src&lt;fr.leroideskiwis.inventory{CustomInventory.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1522501551957" units="1" version="1.0"/>
+</session>

@@ -1,0 +1,164 @@
+package fr.leroideskiwis.modoplugin;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.plugin.java.JavaPlugin;
+
+import fr.leroideskiwis.modoplugin.commands.CommandFly;
+import fr.leroideskiwis.modoplugin.commands.CommandInfos;
+import fr.leroideskiwis.modoplugin.commands.CommandLogs;
+import fr.leroideskiwis.modoplugin.commands.CommandReport;
+import fr.leroideskiwis.modoplugin.commands.CommandSs;
+import fr.leroideskiwis.modoplugin.commands.CommandUnFreeze;
+import fr.leroideskiwis.modoplugin.commands.CommandeBroadcast;
+import fr.leroideskiwis.modoplugin.commands.CommandeStaff;
+import fr.leroideskiwis.modoplugin.commands.CommandeUnMute;
+import fr.leroideskiwis.modoplugin.enums.Sanction;
+import fr.leroideskiwis.modoplugin.listeners.BreakPlace;
+import fr.leroideskiwis.modoplugin.listeners.EventListener;
+import fr.leroideskiwis.modoplugin.listeners.JoinQuitEvent;
+import fr.leroideskiwis.modoplugin.utils.ItemBuilder;
+import fr.leroideskiwis.modoplugin.utils.SpigotUtils;
+
+public class Main extends JavaPlugin{
+	
+	public static Main instance;
+	public List<Player> freezes = new ArrayList<>();
+	public List<Player> mutes = new ArrayList<>();
+	private File modos = new File(getDataFolder()+"/modos.txt");
+	public List<String> pseudosModo = new ArrayList<>();
+	public String prefixe = "§7[§2Modération§7]";
+	public SpigotUtils utils = new SpigotUtils(this);
+	public List<Player> logs = new ArrayList<>();
+	
+	public Inventory getReportInv(String title){
+		
+		Inventory inv = Bukkit.createInventory(null, 9, title);
+		
+		inv.addItem(new ItemBuilder(Material.DIAMOND_SWORD).setName("§cKillaura").build());
+		inv.addItem(new ItemBuilder(Material.WATCH).setName("§cFastPlace").build());
+		inv.addItem(new ItemBuilder(Material.GLASS).setName("§cX-ray").build());
+		
+		return inv ;
+	}
+	
+	public Inventory getInvModo(String title){
+		
+		Inventory inv = Bukkit.createInventory(null, 9*6, title);
+		
+
+		
+		inv.addItem(new ItemBuilder(Material.TNT)
+				.setName("§cGrief")
+				.setLore(Arrays.asList("", "§cCliquez ici si le joueur a grief un batiment,", "§cune structure ou autre chose", "","§7Sanction : Ban (kick si op)")).build());
+		
+		inv.addItem(new ItemBuilder(Material.DIAMOND_SWORD).setName("§cCheat").setLore(Arrays.asList("", "§cTout type de triche (fly, antikb, autoclick, reach, etc...)", "", "§7Sanction : freeze")).build());
+		inv.addItem(new ItemBuilder(Material.BOW).setName("§cInsulte").setLore(Arrays.asList("", "§cInsultes (fdp, ntm etc)", "", "§7Sanction : mute")).build());
+		inv.addItem(new ItemBuilder(Material.ARROW).setName("§cGrosses insultes").setLore(Arrays.asList("", "§cGrosses insultes (du genre clash etc)", "", "§7Sanction : kick")).build());
+		inv.addItem(new Motif(Material.WOOD_DOOR, "quitte pendant verif", Arrays.asList("Quitte pendant verif ou pendant freeze"), Sanction.BAN).build());
+		inv.addItem(new Motif(Material.SIGN, "Pub", Arrays.asList("Pub (par exemple \"venez sur ce serveur : play.funcraft.fr\""), Sanction.MUTE).build());
+		inv.addItem(new Motif(Material.SHIELD, "Ddos/Hack", Arrays.asList("Menace de hack", "ou menace de ddos le serveur"), Sanction.BAN).build());
+		inv.addItem(new Motif(Material.DIAMOND_BLOCK, "Grief bâtiments importants (hub etc)", null, Sanction.BAN).build());
+		inv.addItem(new Motif(Material.DROPPER, "spam", null, Sanction.MUTE).build());
+		inv.addItem(new Motif(Material.ENDER_PEARL, "insulte modo", null, "ban").build());
+		inv.addItem(new Motif(Material.GOLD_AXE, "demande d'op", null, "mute").build());
+		
+		return inv;
+		
+	}
+	
+	public boolean isModo(Player p){
+		
+		return pseudosModo.contains(p.getName());
+		
+	}
+	
+	
+	@Override
+	public void onEnable() {
+		
+		instance = this;
+		
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, () ->{
+			
+			for(Player p : Bukkit.getOnlinePlayers()){
+				
+				if(freezes.contains(p)){
+					
+					utils.sendActionBar(p, "§cVous êtes freeze !");
+					
+				}
+				
+			}
+			
+		}, 0, 0);
+		
+		getCommand("unfreeze").setExecutor(new CommandUnFreeze());
+		getServer().getPluginManager().registerEvents(new EventListener(), this);
+		getServer().getPluginManager().registerEvents(new JoinQuitEvent(), this);
+		getServer().getPluginManager().registerEvents(new BreakPlace(), this);
+		getCommand("ss").setExecutor(new CommandSs());	
+		//getServer().getPluginManager().registerEvents(new CheatEvent(), this);
+		getCommand("unmute").setExecutor(new CommandeUnMute());
+		getCommand("report").setExecutor(new CommandReport());
+		getCommand("staff").setExecutor(new CommandeStaff());
+		getCommand("broadcast").setExecutor(new CommandeBroadcast());
+		getCommand("logs").setExecutor(new CommandLogs());
+		getCommand("fly").setExecutor(new CommandFly());
+		getCommand("infos").setExecutor(new CommandInfos());
+		
+		if(!getDataFolder().exists()) getDataFolder().mkdir();
+		
+		try {
+		if(!modos.exists())
+			
+				modos.createNewFile();
+		
+				FileReader read = new FileReader(modos);
+				BufferedReader br = new BufferedReader(read);
+				String line = br.readLine();
+				
+				while(line != null){
+					
+					pseudosModo.add(line);
+					
+					line = br.readLine();
+				}
+				
+		
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+		
+		
+		
+		
+	}
+	
+	public static Main getInstance(){
+		return instance;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+}

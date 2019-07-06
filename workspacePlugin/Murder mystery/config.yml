@@ -1,0 +1,11 @@
+maxplayers: 5
+
+teleports:
+  hub:
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  spawn:
+    x: 0.0
+    y: 0.0
+    z: 0.0

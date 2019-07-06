@@ -1,0 +1,9 @@
+name: TntRun
+author: LeRoiDesKiwis
+version: 0.5
+main: fr.leroideskiwis.tntrun.Main
+commands:
+  tntrun:
+  leavetnt:
+  eliminetnt:
+  

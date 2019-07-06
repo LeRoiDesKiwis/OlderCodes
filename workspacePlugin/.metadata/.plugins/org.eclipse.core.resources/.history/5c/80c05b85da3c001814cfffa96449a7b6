@@ -1,0 +1,25 @@
+name: ModerationPlugin
+author: LeRoiDesKiwis
+version: 1.0
+main: fr.leroideskiwis.modoplugin.Main
+depends: [HapsyPlugin]
+commands:
+  ss:
+  unfreeze:
+  unmute:
+  report:
+  fly:
+  staff:
+  broadcast:
+    aliases: [bc]
+  logs:
+  whois:
+  cc:
+  searchOffpl:
+    description: chercher un joueur hors ligne
+  join_s:
+  interact:
+  getitem:
+    aliases: [gi]
+  
+  forcmd:

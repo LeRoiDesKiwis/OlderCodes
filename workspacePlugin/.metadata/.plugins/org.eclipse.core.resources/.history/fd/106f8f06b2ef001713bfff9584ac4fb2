@@ -1,0 +1,10 @@
+name: HapsyPlugin
+author: LeRoiDesKiwis
+version: 1.0
+main: fr.leroideskiwis.hapsyplugin.Main
+commands:
+  msg:
+    description: envoie un message
+    aliases: m
+  r:
+    description: repondre a un message

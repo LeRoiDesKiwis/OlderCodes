@@ -1,0 +1,9 @@
+name: TpaPlugin
+author: LeRoiDesKiwis
+version: 1.0
+main: fr.leroideskiwis.tpaplugin.Main
+commands:
+  tpaccept:
+  tpdeny:
+  tpa:
+  tpahere:  

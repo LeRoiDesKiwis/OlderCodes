@@ -1,0 +1,10 @@
+maxPlayers: 10
+locations:
+  spawn:
+    x: 0
+    y: 0
+    z: 0
+  hub:
+    x: 0
+    y: 0
+    z: 0

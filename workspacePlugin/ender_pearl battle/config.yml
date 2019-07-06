@@ -1,0 +1,20 @@
+maxplayers: 2
+
+teleports:
+  spawn:
+    x: 0
+    y: 0
+    z: 0
+  spawns:
+    spawn1:
+      x: 0
+      y: 0
+      z: 0
+    spawn2:
+      x: 0
+      y: 0
+      z: 0
+  hub:
+    x: 0
+    y: 0
+    z: 0

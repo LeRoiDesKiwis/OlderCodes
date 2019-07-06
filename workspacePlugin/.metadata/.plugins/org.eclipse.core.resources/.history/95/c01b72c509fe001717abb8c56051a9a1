@@ -1,0 +1,94 @@
+package fr.leroideskiwis.hapsyplugin.listener;
+
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.weather.WeatherChangeEvent;
+import org.bukkit.permissions.Permission;
+
+import fr.leroideskiwis.hapsyplugin.Main;
+
+public class EventPlugin implements Listener {
+
+	private Main main;
+
+	public EventPlugin(Main main) {
+		this.main = main;
+	}
+
+	@EventHandler
+	public void onBlockChange() {
+
+	}
+
+	public String getMessageByPrefix(AsyncPlayerChatEvent e, String prefixe){
+		return ChatColor.GRAY+prefixe+" "+e.getPlayer().getName()+" §r: §7"+e.getMessage();
+	}
+	
+	public String getStringConfig(String config){
+		return ChatColor.translateAlternateColorCodes('&', main.getConfig().getString(config));
+	}
+	
+	@EventHandler
+	public void onMessageSend(AsyncPlayerChatEvent e){
+		e.setCancelled(true);
+		
+		String message = getMessageByPrefix(e, getStringConfig("prefixes.players.prefixe"));
+		
+		StringBuilder msgbuilder = new StringBuilder();
+		
+	
+		if(e.getPlayer().hasPermission(new Permission("chat.vip"))) message = getMessageByPrefix(e, "§6[§eVIP§6]§e");
+		if(e.getPlayer().isOp()) message = getMessageByPrefix(e, getStringConfig("prefixes.op.prefixe"));
+		if(e.getPlayer().getName().equalsIgnoreCase(getStringConfig("prefixes.owner.name"))) message = getMessageByPrefix(e, getStringConfig("prefixes.owner.prefixe"));
+		
+		
+		for(Player p : Bukkit.getOnlinePlayers()){
+			if(e.getMessage().contains(p.getName()) && !e.getPlayer().equals(p)) {
+				p.sendMessage(message.replaceAll(p.getName(), ChatColor.GREEN+p.getName()));
+				
+				return;
+			}
+			p.sendMessage(message);
+		}
+	}
+	
+	
+	@EventHandler(priority=EventPriority.HIGH)
+	public void onJoin(PlayerJoinEvent e){
+		String message = main.getConfig().getString("messages.join");
+		if(message.equals("") || message.equals("default") || message == null) return;
+		
+		if(!e.getPlayer().hasPermission("chat.vip")) e.setJoinMessage(null); else {
+		
+		e.setJoinMessage(null);
+		
+		for(Player p : Bukkit.getOnlinePlayers()){
+			if(p.equals(e.getPlayer())) continue;
+			p.sendMessage(ChatColor.translateAlternateColorCodes('&', message).replaceAll("<player>", e.getPlayer().getDisplayName()));
+		}
+		
+		}
+	}
+	
+	@EventHandler
+	public void onQuit(PlayerQuitEvent e){
+		String message = main.getConfig().getString("messages.quit");
+		if(message.equals("") || message.equals("default") || message == null) return;
+		if(!e.getPlayer().hasPermission("chat.vip")) e.setQuitMessage(null); else
+		
+		e.setQuitMessage(message.replaceAll("&", "§").replaceAll("<player>", e.getPlayer().getDisplayName()));
+	}
+	
+	@EventHandler
+	public void WeatherInfini(WeatherChangeEvent e) {
+		e.setCancelled(true);
+	}
+}

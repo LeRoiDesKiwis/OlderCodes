@@ -1,0 +1,7 @@
+name: Shop
+version: 1.0
+author: LeRoiDesKiwis
+main: fr.leroideskiwis.shop
+depends: [Vault]
+commands:
+  shop:
